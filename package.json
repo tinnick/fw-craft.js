@@ -1,21 +1,14 @@
 {
-  "name": "fw-craft.js",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "scripts": {
-    "build": "rimraf dist && tsc"
-  },
-  "dependencies": {
-    "@types/d3": "^6.7.0",
-    "d3": "^6.7.0"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
   },
   "devDependencies": {
-    "rimraf": "^3.0.2"
-  }
+    "sass": "^1.34.1",
+    "typescript": "^4.2.3",
+    "vite": "^2.3.5"
+  },
+  "dependencies": {}
 }

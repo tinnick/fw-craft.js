@@ -1,8 +1,9 @@
 @import 'normalize.css';
+@import 'rock-paper-scissors.scss';
 
 body {
   background-color: #08171a;
   width: 100vw;
   overflow-x: hidden;
+  scroll-snap-type: y proximity;
 }
-

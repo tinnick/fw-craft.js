@@ -1,0 +1,154 @@
+$theme-color: #f15546;
+$theme-font: 'Pangolin', cursive;
+$background-color: #08171a;
+
+* {
+  user-select: none;
+}
+
+.rock-paper-scissors {
+
+  .rules {
+    margin: auto;
+    width: 80vw;
+
+    .rules-image {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+
+      &:after {
+        position: absolute;
+        content: "";
+        bottom: 0;
+        width: 100%;
+        height: 10%;
+        background-color: $background-color;
+      }
+
+      & > img {
+        min-width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .choice-selection {
+    width: 65vw;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5vw;
+
+    .choice {
+      cursor: pointer;
+
+      img {
+        width: 100%;
+        transition: transform 0.2s ease-in-out;
+      }
+
+      &:hover img {
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  .janken {
+    width: 80vw;
+    margin: 24px auto;
+    scroll-margin: 0;
+
+    .janken-result {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+
+      .win-count, .lose-count, .result-text {
+        text-align: center;
+        color: whitesmoke;
+        font: 64px 'Pangolin', cursive;
+      }
+    }
+
+    .janken-choices {
+      display: flex;
+      gap: 10vw;
+      width: 100%;
+      justify-content: space-around;
+
+      .user-choice, .computer-choice {
+        width: 25vw;
+        height: 25vw;
+
+        img {
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .user-choice {
+        img {
+          transform: rotate(90deg) scaleX(-1);
+        }
+      }
+
+      .computer-choice {
+        img {
+          transform: rotate(-90deg);
+        }
+      }
+    }
+  }
+
+  .reset-count {
+    display: block;
+    width: 45vw;
+    height: 64px;
+    color: whitesmoke;
+    font: 32px $theme-font;
+    margin: 48px auto 0;
+    border: solid 4px $theme-color;
+    border-radius: 32px;
+    background-color: $background-color;
+    transition: background-color 0.1s linear;
+
+    &:hover {
+      background-color: $theme-color;
+    }
+  }
+
+  .opponent-ratio__title {
+    display: block;
+    margin: 80px auto -160px;
+    color: whitesmoke;
+    text-align: center;
+    font: 64px $theme-font;
+  }
+
+  .opponent-ratio__graph {
+    height: 400px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    gap: 40px;
+
+    & > div {
+      width: 15%;
+      background-color: $theme-color;
+      color: black;
+      font: 24px $theme-font;
+      display: inherit;
+      justify-content: inherit;
+      align-items: inherit;
+    }
+  }
+}

@@ -1,27 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title></title>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
 
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="src/styles/base.scss">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&family=Pangolin&display=swap" rel="stylesheet">
+  </head>
+  <body>
 
-  <div class="rock-paper-scissors">
-
-    <div class="rules">
-      <div class="rules-image">
-        <img src="assets/images/rules.jpg" alt="rock-paper-scissors rule">
+    <div class="rock-paper-scissors">
+      <div class="rules">
+        <div class="rules-image">
+          <img src="assets/images/rules.jpg" alt="how to play">
+        </div>
       </div>
 
-      <div class="scroll-down">
-        <div class="triangle t1"></div>
-        <div class="triangle t2"></div>
+      <div class="choice-selection">
+        <div class="choice choice__rock" onclick="selectChoice('rock')">
+          <img src="assets/images/hand-rock-filled-red.svg" alt="rock">
+        </div>
+
+        <div class="choice choice__scissor" onclick="selectChoice('scissor')">
+          <img src="assets/images/hand-scissor-filled-red.svg" alt="scissor">
+        </div>
+
+        <div class="choice choice__paper" onclick="selectChoice('paper')">
+          <img src="assets/images/hand-paper-filled-red.svg" alt="paper">
+        </div>
       </div>
+
+      <div class="janken">
+        <div class="janken-result">
+          <div class="win-count">0</div>
+          <div class="result-text">CHOOSE A HAND</div>
+          <div class="lose-count">0</div>
+        </div>
+
+        <div class="janken-choices">
+          <div class="user-choice">
+            <div><!-- replaced! --></div>
+          </div>
+
+          <div class="computer-choice">
+            <div><!-- replaced! --></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="reset-count" onclick="resetCount()">RESET</button>
+
+      <div class="opponent-ratio__title">OPPONENT HAND RATIO</div>
+      <div class="opponent-ratio__graph"></div>
+
+
+      <template class="rock-template">
+        <img class="rock" src="assets/images/hand-rock-filled-red.svg" alt="rock">
+      </template>
+
+      <template class="scissor-template">
+        <img class="scissor" src="assets/images/hand-scissor-filled-red.svg" alt="scissor">
+      </template>
+
+      <template class="paper-template">
+        <img class="paper" src="assets/images/hand-paper-filled-red.svg" alt="paper">
+      </template>
+
     </div>
-  </div>
 
-  <script src="dist/index.js"></script>
-</body>
+    <!-- script type="module" src="/src/main.ts"></script -->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="/src/main.ts"></script>
+  </body>
 </html>
