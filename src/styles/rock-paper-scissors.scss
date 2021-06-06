@@ -10,6 +10,7 @@ $background-color: #08171a;
 
   .rules {
     margin: auto;
+    max-width: 800px;
     width: 80vw;
 
     .rules-image {
@@ -39,6 +40,7 @@ $background-color: #08171a;
 
   .choice-selection {
     width: 65vw;
+    max-width: 800px;
     margin: auto;
     display: flex;
     justify-content: center;
@@ -61,6 +63,8 @@ $background-color: #08171a;
 
   .janken {
     width: 80vw;
+    max-width: 650px;
+    max-height: 350px;
     margin: 24px auto;
     scroll-margin: 0;
 
@@ -111,6 +115,7 @@ $background-color: #08171a;
   .reset-count {
     display: block;
     width: 45vw;
+    max-width: 650px;
     height: 64px;
     color: whitesmoke;
     font: 32px $theme-font;
@@ -135,7 +140,8 @@ $background-color: #08171a;
 
   .opponent-ratio__graph {
     height: 400px;
-    width: 100%;
+    max-width: 800px;
+    margin: auto;
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
