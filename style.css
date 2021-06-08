@@ -1,8 +1,1 @@
-@import 'normalize.css';
-
-body {
-  background-color: #08171a;
-  width: 100vw;
-  overflow-x: hidden;
-}
-
+@import './src/styles/base.scss';

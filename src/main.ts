@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import './styles/base.scss';
 
 enum JankenChoiceEnum {
   ROCK = 'rock',
@@ -18,33 +19,37 @@ enum ActorEnum {
 }
 
 
-document.querySelector('.choice__rock').addEventListener('click', () => selectChoice(JankenChoiceEnum.ROCK));
-document.querySelector('.choice__scissor').addEventListener('click', () => selectChoice(JankenChoiceEnum.SCISSOR));
-document.querySelector('.choice__paper').addEventListener('click', () => selectChoice(JankenChoiceEnum.PAPER));
-document.querySelector('.reset-count').addEventListener('click', () => resetCount());
+(document.querySelector('.choice__rock') as HTMLDivElement).addEventListener('click', () => selectChoice(JankenChoiceEnum.ROCK));
+(document.querySelector('.choice__scissor') as HTMLDivElement).addEventListener('click', () => selectChoice(JankenChoiceEnum.SCISSOR));
+(document.querySelector('.choice__paper') as HTMLDivElement).addEventListener('click', () => selectChoice(JankenChoiceEnum.PAPER));
+(document.querySelector('.reset-count') as HTMLDivElement).addEventListener('click', () => resetCount());
 
 
 let winCount: number = 0;
 let loseCount: number = 0;
 
-const resultTextElement = document.querySelector('.janken-result .result-text');
-const winCountElement = document.querySelector('.janken-result .win-count');
-const loseCountElement = document.querySelector('.janken-result .lose-count');
+const resultTextElement = document.querySelector('.janken-result .result-text') as HTMLDivElement;
+const winCountElement = document.querySelector('.janken-result .win-count') as HTMLDivElement;
+const loseCountElement = document.querySelector('.janken-result .lose-count') as HTMLDivElement;
 
 function selectChoice(userChoice: JankenChoiceEnum): void {
-  const templates: Record<JankenChoiceEnum, HTMLImageElement> = {
-    [JankenChoiceEnum.ROCK]: () => document.querySelector('.rock-template').content.cloneNode(true),
-    [JankenChoiceEnum.SCISSOR]: () => document.querySelector('.scissor-template').content.cloneNode(true),
-    [JankenChoiceEnum.PAPER]: () => document.querySelector('.paper-template').content.cloneNode(true)
+  const templates: Record<JankenChoiceEnum, () => Node> = {
+    [JankenChoiceEnum.ROCK]: () => (document.querySelector('.rock-template') as HTMLTemplateElement).content.cloneNode(true),
+    [JankenChoiceEnum.SCISSOR]: () => (document.querySelector('.scissor-template') as HTMLTemplateElement).content.cloneNode(true),
+    [JankenChoiceEnum.PAPER]: () => (document.querySelector('.paper-template') as HTMLTemplateElement).content.cloneNode(true)
   }
 
   const userChoiceElement = document.querySelector('.user-choice');
   const computerChoiceElement = document.querySelector('.computer-choice');
 
   const computerChoice = getComputerChoice();
+  
+  if (!userChoiceElement || !computerChoiceElement) {
+    return;
+  }
 
-  userChoiceElement.replaceChild(templates[userChoice].call(), userChoiceElement.firstElementChild);
-  computerChoiceElement.replaceChild(templates[computerChoice].call(), computerChoiceElement.firstElementChild);
+  userChoiceElement.replaceChild(templates[userChoice](), userChoiceElement.firstElementChild as Node);
+  computerChoiceElement.replaceChild(templates[computerChoice](), computerChoiceElement.firstElementChild as Node);
 
   const winner = JanKenPon(userChoice, computerChoice);
 
@@ -53,14 +58,14 @@ function selectChoice(userChoice: JankenChoiceEnum): void {
 
     winCount++;
 
-    winCountElement.innerText = winCount;
+    winCountElement.innerText = String(winCount);
     resultTextElement.innerText = 'WIN!';
   } else if (winner === ActorEnum.COMPUTER) {
     // handle lose
 
     loseCount++;
 
-    loseCountElement.innerText = loseCount;
+    loseCountElement.innerText = String(loseCount);
     resultTextElement.innerText = 'LOSE!';
   } else {
     // handle tie
@@ -73,8 +78,8 @@ function resetCount(): void {
   winCount = 0;
   loseCount = 0;
 
-  winCountElement.innerText = winCount;
-  loseCountElement.innerText = loseCount;
+  winCountElement.innerText = String(winCount);
+  loseCountElement.innerText = String(loseCount);
   resultTextElement.innerText = 'CHOOSE A HAND';
 }
 
@@ -106,7 +111,7 @@ function getComputerChoice(): JankenChoiceEnum {
   return JankenChoiceToNumberMap[ Math.ceil(Math.random() * 3) ];
 }
 
-async function testComputerChoiceRatio(): void {
+async function testComputerChoiceRatio(): Promise<void> {
 
   const choices: Record<JankenChoiceEnum, number> = {
     [JankenChoiceEnum.ROCK]: 0,
@@ -131,7 +136,7 @@ async function testComputerChoiceRatio(): void {
 
 }
 
-async function* generateComputerChoices(limit: number): IterableIterator<JankenChoiceEnum> {
+async function* generateComputerChoices(limit: number): AsyncGenerator<JankenChoiceEnum, void, unknown> {
   let count: number = 0;
 
   while (count !== limit) {
