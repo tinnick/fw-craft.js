@@ -1,3 +1,5 @@
+import * as d3 from 'd3';
+
 enum JankenChoiceEnum {
   ROCK = 'rock',
   SCISSOR = 'scissor',
@@ -14,6 +16,13 @@ enum ActorEnum {
   USER,
   COMPUTER
 }
+
+
+document.querySelector('.choice__rock').addEventListener('click', () => selectChoice(JankenChoiceEnum.ROCK));
+document.querySelector('.choice__scissor').addEventListener('click', () => selectChoice(JankenChoiceEnum.SCISSOR));
+document.querySelector('.choice__paper').addEventListener('click', () => selectChoice(JankenChoiceEnum.PAPER));
+document.querySelector('.reset-count').addEventListener('click', () => resetCount());
+
 
 let winCount: number = 0;
 let loseCount: number = 0;
